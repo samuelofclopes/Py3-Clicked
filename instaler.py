@@ -3,22 +3,22 @@ import shutil
 import sys
 
 def install_windows_packages():
-    print("Sistema Windows detectado.")
-    print("Nota: O 'tkinter' já vem embutido no Python do Windows por padrão.")
-    print("Instalando 'pynput' usando o pip...\n")
+    print("Windows system detected.")
+    print("Note: 'tkinter' is already built-in to Windows Python by default.")
+    print("Installing 'pynput' using pip...\n")
     
     try:
-        # No Windows, o pip é seguro e recomendado.
-        # sys.executable garante que estamos usando o pip da instalação atual do Python
+        # On Windows, pip is safe and recommended.
+        # sys.executable ensures we are using the pip from the current Python installation
         subprocess.check_call([sys.executable, "-m", "pip", "install", "pynput"])
-        print("\nSucesso! pynput instalado no Windows.")
+        print("\nSuccess! pynput installed on Windows.")
     except subprocess.CalledProcessError:
-        print("\nErro: Falha ao instalar o pynput via pip no Windows.")
+        print("\nError: Failed to install pynput via pip on Windows.")
 
 def install_linux_packages():
-    print("Sistema Linux detectado. Verificando gerenciadores de pacotes...\n")
+    print("Linux system detected. Checking package managers...\n")
 
-    # Mapeamento dos gerenciadores do Linux
+    # Mapping of Linux package managers
     managers = {
         "apt-get": {
             "cmd": ["sudo", "apt-get", "install", "-y"],
@@ -38,29 +38,29 @@ def install_linux_packages():
 
     for manager, details in managers.items():
         if shutil.which(manager):
-            print(f"'{manager}' detectado. Tentando instalação...")
+            print(f"'{manager}' detected. Attempting installation...")
             full_command = details["cmd"] + details["packages"]
             
             try:
                 subprocess.check_call(full_command)
-                print(f"\nSucesso! tkinter e pynput instalados.")
+                print(f"\nSuccess! tkinter and pynput installed.")
                 installed = True
                 break
             except subprocess.CalledProcessError:
-                print(f"\nErro: {manager} encontrou um problema durante a instalação.")
+                print(f"\nError: {manager} encountered a problem during installation.")
                 break
 
     if not installed:
-        print("\nNão foi possível detectar um gerenciador de pacotes Linux suportado automaticamente.")
+        print("\nCould not automatically detect a supported Linux package manager.")
 
 if __name__ == "__main__":
-    print("Iniciando processo de instalação multiplataforma...\n")
+    print("Starting cross-platform installation process...\n")
     
     if sys.platform == "win32":
         install_windows_packages()
     elif sys.platform.startswith("linux"):
         install_linux_packages()
     else:
-        print(f"Sistema operacional não suportado por este script: {sys.platform}")
+        print(f"Operating system not supported by this script: {sys.platform}")
     
-    print("\nProcesso finalizado.")
+    print("\nProcess finished.")
