@@ -79,6 +79,8 @@ class AutoClickerGUI(tk.Tk):
         if running:
             self.status_label.config(text="Estado: A CLICAR", foreground="green")
             self.toggle_button.config(text="Parar (F6)")
+            self.toggle_button.config(state="disabled")
+            self.after(400, lambda: self.toggle_button.config(state="normal"))
         else:
             self.status_label.config(text="Estado: PARADO", foreground="red")
             self.toggle_button.config(text="Iniciar (F6)")
