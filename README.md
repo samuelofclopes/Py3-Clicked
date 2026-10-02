@@ -1,29 +1,27 @@
 # Py3-Clicked
-An python3 made autoclicker for linux &amp; Windows.
+A Python 3 autoclicker for Linux & Windows. Press **F6** anywhere to start/stop.
 
-How to use?
-=================================================
-First of all run:
+## Install
 ```
-python3 installer.py
+python3 install.py
 ```
-to install the dependencies (pynput and tkinter if needed)
+This checks for tkinter, creates a private virtualenv with `pynput`, and adds
+a launcher (`.desktop` on Linux, Start Menu shortcut on Windows).
+Then search for **Py3-Clicked** in your applications menu.
 
-After that you can securely run:
+Uninstall: `python3 install.py --uninstall` (add `--purge` to also delete settings).
+
+## Run without installing
 ```
-python3 main.py
+pip install pynput
+python3 main.pyw
 ```
-and use the autocliker normaly.
 
-NOTES
-=================================================
-This program was tested it in:
+## Notes
+- Settings are stored in `~/.config/py3-clicked/` (Linux) or `%APPDATA%\py3-clicked\` (Windows).
+- tkinter is the only system dependency (`sudo apt install python3-tk`, `sudo dnf install python3-tkinter`, `sudo pacman -S tk`).
+- On Linux, pynput depends on `evdev`, which may need a C compiler and the Python headers (`python3-dev`).
+- Wayland: pynput only sees input from XWayland windows, so F6 and clicks may not work system-wide. Please report incompatibilities!
 
-WayLand, X11 with Debian based distros.
-
-Please, if you see any incompatibility, REPORT! and/or Pull Request an solution if you find any.
-
-WHY I MAKE IT
-=================================================
-
-With the importance of an autocliker in modern society, I was forced to create my own, serving it to all my OSes and satisfying my need.
+## Why
+With the importance of an autoclicker in modern society, I was forced to create my own.
